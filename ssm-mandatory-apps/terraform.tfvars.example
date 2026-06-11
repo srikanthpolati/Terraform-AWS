@@ -1,0 +1,40 @@
+###############################################################################
+# Example terraform.tfvars
+# Copy and populate before running terraform plan/apply
+###############################################################################
+
+aws_region  = "ap-southeast-2"
+environment = "prod"
+
+common_tags = {
+  Environment    = "prod"
+  ManagedBy      = "terraform"
+  CostCentre     = "infra-ops"
+  ComplianceScope = "mandatory-agents"
+}
+
+# Target Linux instances tagged OS=Linux or OS=AmazonLinux
+linux_target_key    = "tag:OS"
+linux_target_values = ["Linux", "AmazonLinux", "RHEL", "Ubuntu"]
+
+# Target Windows instances tagged OS=Windows
+windows_target_key    = "tag:OS"
+windows_target_values = ["Windows"]
+
+# Target versions — update here to roll out a new version estate-wide
+mandatory_app_versions = {
+  splunk_uf    = "9.3.0"
+  qualys_agent = "4.7.0"
+  cloudwatch   = "3.3.0"
+  carbonblack  = "3.9.1"
+}
+
+# Run compliance enforcement daily at 2am UTC
+schedule_expression = "cron(0 2 * * ? *)"
+
+# Agent configuration — use your actual values
+splunk_deployment_server = "splunk-ds.internal.example.com:8089"
+qualys_activation_id     = "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+qualys_customer_id       = "YYYYYYYY-YYYY-YYYY-YYYY-YYYYYYYYYYYY"
+carbonblack_server_url   = "https://defense.conferdeploy.net"
+carbonblack_group_name   = "AWS-Production-Servers"
