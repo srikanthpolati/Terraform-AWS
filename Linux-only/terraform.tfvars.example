@@ -1,0 +1,27 @@
+###############################################################################
+# Example tfvars — copy to terraform.tfvars and fill in your values
+# provisioners/ssm/identifiers/linux/terraform.tfvars
+###############################################################################
+
+aws_region     = "ap-southeast-2"
+environment    = "prod"
+s3_bucket_name = "my-org-ssm-packages-prod"
+kms_key_arn    = "arn:aws:kms:ap-southeast-2:123456789012:key/xxxx-xxxx"  # optional
+
+# Application target versions
+splunk_version      = "9.2.1"
+qualys_version      = "4.7.0"
+cloudwatch_version  = "latest"
+carbonblack_version = "3.9.1"
+
+# Splunk
+splunk_deployment_server = "splunk-ds.internal.example.com:8089"
+splunk_index_name        = "main"
+
+# Qualys (sensitive — consider using TF_VAR_ env vars or a secrets backend)
+qualys_activation_id = "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+qualys_customer_id   = "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+
+# CarbonBlack
+carbonblack_server_url = "https://defense.conferdeploy.net"
+carbonblack_group_name = "production-servers"
