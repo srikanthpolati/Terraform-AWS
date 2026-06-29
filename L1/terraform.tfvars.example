@@ -1,0 +1,25 @@
+# =============================================================================
+# Example: provisioner/terraform.tfvars
+# Adjust values to match your environment.
+# =============================================================================
+
+name_prefix = "prod"
+aws_region  = "ap-southeast-2"
+
+# S3 package — internal bucket, no internet download
+s3_bucket = "my-software-packages-prod"
+s3_key    = "splunk/linux/9.2.1/splunkforwarder-9.2.1-linux-2.6-x86_64.rpm"
+
+# Splunk config
+deployment_server      = "splunk-ds.internal.example.com"
+deployment_server_port = 8089
+
+# Use SSM Parameter Store in production:
+#   splunk_admin_password = (set via TF_VAR_splunk_admin_password env var or CI/CD secret)
+splunk_admin_password = "CHANGE_ME_USE_SECRETS_MANAGER"
+
+tags = {
+  Team        = "platform"
+  CostCenter  = "infrastructure"
+  Application = "splunk-forwarder"
+}
